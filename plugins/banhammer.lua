@@ -94,7 +94,7 @@ local function kick_ban_res(extra, success, result)
 		receiver = 'channel#id'..chat_id
 	  end
 	  if success == 0 then
-		return send_large_msg(receiver, "نمیتوان یوزرنیم را پیدا کرد")
+		return send_large_msg(receiver, " یوزرنیم یافت نشدℹ")
 	  end
       local member_id = result.peer_id
       local user_id = member_id
@@ -103,17 +103,17 @@ local function kick_ban_res(extra, success, result)
       local get_cmd = extra.get_cmd
        if get_cmd == "اخراج" then
          if member_id == from_id then
-            send_large_msg(receiver, "شما نمیتوانید خودتان را اخراج کنید")
+            send_large_msg(receiver, "شما نمیتوانید خودتان را اخراج کنیدℹ")
 			return
          end
          if is_momod2(member_id, chat_id) and not is_admin2(sender) then
-            send_large_msg(receiver, "شما نمیتوانید این فرد را اخراج کنید")
+            send_large_msg(receiver, "شما نمیتوانید این فرد را اخراج کنیدℹ")
 			return
          end
 		 kick_user(member_id, chat_id)
       elseif get_cmd == 'بن' then
         if is_momod2(member_id, chat_id) and not is_admin2(sender) then
-			send_large_msg(receiver, "شما نمیتوانید این فرد را بن کنید")
+			send_large_msg(receiver, "شما نمیتوانید این فرد را بن کنیدℹ")
 			return
         end
         send_large_msg(receiver, 'کاربر @'..member..' ['..member_id..'] بن شد')
@@ -149,7 +149,7 @@ local support_id = msg.from.id
       return "آیدی گروه " ..string.gsub(msg.to.print_name, "_", " ").. ":\n\n"..msg.to.id
     end
   end
-  if matches[1]:lower() == 'kickme' and msg.to.type == "chat" then-- /kickme
+  if matches[1]:lower() == 'اخراج من' and msg.to.type == "chat" then-- /kickme
   local receiver = get_receiver(msg)
     if msg.to.type == 'chat' then
       local print_name = user_print_name(msg.from):gsub("‮", "")
@@ -170,7 +170,7 @@ local support_id = msg.from.id
     end
     return ban_list(chat_id)
   end
-  if matches[1]:lower() == 'ban' then-- /ban
+  if matches[1]:lower() == 'بن' then-- /ban
     if type(msg.reply_id)~="nil" and is_momod(msg) then
 		print('ok1')
       if is_admin1(msg) then
@@ -186,10 +186,10 @@ local support_id = msg.from.id
          	return
         end
         if not is_admin1(msg) and is_momod2(matches[2], msg.to.id) then
-          	return "you can't ban mods/owner/admins"
+          	return "شما نمیتوانید این فرد را بن کنیدℹ"
         end
         if tonumber(matches[2]) == tonumber(msg.from.id) then
-          	return "You can't ban your self !"
+          	return "شما نمیتوانید خودتان را بن کنیدℹ"
         end
         local print_name = user_print_name(msg.from):gsub("‮", "")
 	    local name = print_name:gsub("_", "")
