@@ -16,19 +16,19 @@ local function get_weather(location)
   local weather = json:decode(b)
   local city = weather.name
   local country = weather.sys.country
-  local temp = 'The temperature in '..city
+  local temp = 'آب و هوا در  '..city
     ..' (' ..country..')'
     ..' is '..weather.main.temp..'°C'
-  local conditions = 'Current conditions are: '
+  local conditions = 'آب و هوا 🌞🌝☔❄: '
     .. weather.weather[1].description
 
-  if weather.weather[1].main == 'Clear' then
+  if weather.weather[1].main == 'صاف' then
     conditions = conditions .. ' ☀'
-  elseif weather.weather[1].main == 'Clouds' then
+  elseif weather.weather[1].main == 'ابری' then
     conditions = conditions .. ' ☁☁'
-  elseif weather.weather[1].main == 'Rain' then
+  elseif weather.weather[1].main == 'بارانی' then
     conditions = conditions .. ' ☔'
-  elseif weather.weather[1].main == 'Thunderstorm' then
+  elseif weather.weather[1].main == 'بارش (همراه باد)' then
     conditions = conditions .. ' ☔☔☔☔'
   end
 
