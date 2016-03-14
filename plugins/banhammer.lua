@@ -208,7 +208,7 @@ local support_id = msg.from.id
   end
 
 
-  if matches[1]:lower() == 'unban' then -- /unban
+  if matches[1]:lower() == 'حذف بن' then -- /unban
     if type(msg.reply_id)~="nil" and is_momod(msg) then
       local msgr = get_message(msg.reply_id,unban_by_reply, false)
     end
@@ -222,7 +222,7 @@ local support_id = msg.from.id
         	local print_name = user_print_name(msg.from):gsub("‮", "")
 			local name = print_name:gsub("_", "")
         	savelog(msg.to.id, name.." ["..msg.from.id.."] unbaned user ".. matches[2])
-        	return 'User '..user_id..' unbanned'
+        	return 'بن کاربر'..user_id..' حذف شد'
       else
 		local cbres_extra = {
 			chat_id = msg.to.id,
@@ -235,7 +235,7 @@ local support_id = msg.from.id
 	end
  end
 
-if matches[1]:lower() == 'kick' then
+if matches[1]:lower() == 'اخراج' then
     if type(msg.reply_id)~="nil" and is_momod(msg) then
       if is_admin1(msg) then
         local msgr = get_message(msg.reply_id,Kick_by_reply_admins, false)
@@ -247,10 +247,10 @@ if matches[1]:lower() == 'kick' then
 			return
 		end
 		if not is_admin1(msg) and is_momod2(matches[2], msg.to.id) then
-			return "you can't kick mods/owner/admins"
+			return " شما نمیتوانید این فرد را اخراج کنیدℹ"
 		end
 		if tonumber(matches[2]) == tonumber(msg.from.id) then
-			return "You can't kick your self !"
+			return "شما نمیتوانید خودتان را اخراج کنیدℹ"
 		end
     local user_id = matches[2]
     local chat_id = msg.to.id
@@ -262,7 +262,7 @@ if matches[1]:lower() == 'kick' then
 	else
 		local cbres_extra = {
 			chat_id = msg.to.id,
-			get_cmd = 'kick',
+			get_cmd = 'اخراج',
 			from_id = msg.from.id,
 			chat_type = msg.to.type
 		}
@@ -276,7 +276,7 @@ end
 		return
 	end
 
-  if matches[1]:lower() == 'banall' and is_admin1(msg) then -- Global ban
+  if matches[1]:lower() == 'سوپر بن' and is_admin1(msg) then -- Global ban
     if type(msg.reply_id) ~="nil" and is_admin1(msg) then
       banall = get_message(msg.reply_id,banall_by_reply, false)
     end
@@ -288,11 +288,11 @@ end
          	return false
         end
         	banall_user(targetuser)
-       		return 'User ['..user_id..' ] globally banned'
+       		return 'کاربر ['..user_id..' ] سوپر بن شد'
      else
 	local cbres_extra = {
 		chat_id = msg.to.id,
-		get_cmd = 'banall',
+		get_cmd = 'سوپر بن',
 		from_id = msg.from.id,
 		chat_type = msg.to.type
 	}
@@ -300,7 +300,7 @@ end
 		resolve_username(username, kick_ban_res, cbres_extra)
       end
   end
-  if matches[1]:lower() == 'unbanall' then -- Global unban
+  if matches[1]:lower() == 'حذف سوپر بن' then -- Global unban
     local user_id = matches[2]
     local chat_id = msg.to.id
       if string.match(matches[2], '^%d+$') then
@@ -308,11 +308,11 @@ end
           	return false
         end
        		unbanall_user(user_id)
-        	return 'User ['..user_id..' ] globally unbanned'
+        	return 'سوپ بن کاربر ['..user_id..' ] حذف شد'
     else
 		local cbres_extra = {
 			chat_id = msg.to.id,
-			get_cmd = 'unbanall',
+			get_cmd = 'حذف سوپر بن',
 			from_id = msg.from.id,
 			chat_type = msg.to.type
 		}
@@ -320,28 +320,28 @@ end
 		resolve_username(username, kick_ban_res, cbres_extra)
       end
   end
-  if matches[1]:lower() == "gbanlist" then -- Global ban list
+  if matches[1]:lower() == "لیست سوپر بن" then -- Global ban list
     return banall_list()
   end
 end
 
 return {
   patterns = {
-    "^[#!/]([Bb]anall) (.*)$",
-    "^[#!/]([Bb]anall)$",
-    "^[#!/]([Bb]anlist) (.*)$",
-    "^[#!/]([Bb]anlist)$",
-    "^[#!/]([Gg]banlist)$",
-	"^[#!/]([Kk]ickme)",
-    "^[#!/]([Kk]ick)$",
-	"^[#!/]([Bb]an)$",
-    "^[#!/]([Bb]an) (.*)$",
-    "^[#!/]([Uu]nban) (.*)$",
-    "^[#!/]([Uu]nbanall) (.*)$",
-    "^[#!/]([Uu]nbanall)$",
-    "^[#!/]([Kk]ick) (.*)$",
-    "^[#!/]([Uu]nban)$",
-    "^[#!/]([Ii]d)$",
+    "^(سوپر بن) (.*)$",
+    "^(سوپر بن)$",
+    "^(لیست بن) (.*)$",
+    "^(لیست بن)$",
+    "^(لیست سوپر بن)$",
+	   "^( اخراج من)",
+    "^(اخراج)$",
+   	"^[بن)$",
+    "^(بن) (.*)$",
+    "^(حذف بن) (.*)$",
+    "^(حذف سوپر بن) (.*)$",
+    "^(حذف سوپر بن)$",
+    "^(اخراج) (.*)$",
+    "^(حذف بن)$",
+    "^(آیدی)$",
     "^!!tgservice (.+)$"
   },
   run = run,
