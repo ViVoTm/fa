@@ -3,8 +3,8 @@ local function template_add_user(base, to_username, from_username, chat_name, ch
    base = base or ''
    to_username = '@' .. (to_username or '')
    from_username = '@' .. (from_username or '')
-   chat_name = string.gsub(channel_name, '_', ' ') or ''
-   chat_id = "channel#id" .. (channel_id or '')
+   chat_name = string.gsub(chat_name, '_', ' ') or ''
+   channel_id = "channel#id" .. (channel_id or '')
    if to_username == "@" then
       to_username = ''
    end
@@ -91,8 +91,8 @@ local function run(msg, matches)
    end
 end
 return {
-   description = "Welcoming Message",
-   usage = "send message to new member",
+   description = "خوش آمد گویی",
+   usage = "خوش آمد گویی و خداحافظی",
    patterns = {
       "^!!tgservice (chat_add_user)$",
       "^!!tgservice (chat_add_user_link)$",
