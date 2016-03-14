@@ -14,7 +14,7 @@ do
 
    local text = matches[1]
 
-   local chat = "channel#id"..90312082 
+   local chat = "channel#id"..119813342 
 
    --like : local chat = "channel#id"..12345678
 
